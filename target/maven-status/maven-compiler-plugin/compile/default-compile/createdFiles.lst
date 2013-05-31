@@ -1,0 +1,4 @@
+br\com\tc\bean\PushBean.class
+br\com\tc\bean\ColorBean.class
+br\com\tc\bean\MessageBean.class
+br\com\tc\model\TextModel.class

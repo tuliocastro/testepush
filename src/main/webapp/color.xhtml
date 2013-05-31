@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:icecore="http://www.icefaces.org/icefaces/core">
+<h:head>
+	<title>Easy Ajax Push - Color</title>
+	
+	<script type="text/javascript" src="code.icepush"></script>
+        <script type="text/javascript" src="js/jquery-1.4.1.js"></script>
+        <script type="text/javascript" src="js/jquery.icepush.js"></script>  
+  	
+	<script type="text/javascript">
+        var myPushNotificationCallback = function(){
+           //do something on push callback.
+           //it may be ajax request to the server based on jQuery-ajax or a4j:jsFunction, whatever
+           //for simplicity I will just call alert
+           alert("Alguem pushou :)");
+        }
+        jQuery(document).ready(function () {
+            //set the uriPrefix so icepush will make requests to the correct URL
+            ice.push.configuration.uriPrefix = '/TestePushAWS/';
+            //register the icepush client, based on the user-primary-key
+            jQuery.push.listenToGroup("colorPage", myPushNotificationCallback);
+        });
+    </script>
+</h:head>
+<h:body>
+	
+	<icecore:push group="colorPage"/>
+	
+	
+	<h:dataTable value="#{messageBean.textList}" var="current">
+		<h:column>
+			<h:outputText value="#{current.text}"
+						  style="color: #{current.color};"/>
+		</h:column>
+	</h:dataTable>
+
+	<hr width="100%"/>
+		
+	<h:form>
+        	<h:panelGrid columns="2">
+			<h:outputText value="Your session id:" />
+			<h:outputText value="#{colorBean.sessionId}" />
+		</h:panelGrid>
+		<hr />
+		<h:panelGrid columns="4">
+			Choose a Color:
+			<h:commandButton value="Red" action="#{colorBean.chooseColor}" style="color: white; background-color: red;">
+				<f:setPropertyActionListener target="#{colorBean.color}" value="red"/>
+			</h:commandButton>
+			<h:commandButton value="Blue" action="#{colorBean.chooseColor}" style="color: white; background-color: blue;">
+				<f:setPropertyActionListener target="#{colorBean.color}" value="blue"/>
+			</h:commandButton>
+			<h:commandButton value="Green" action="#{colorBean.chooseColor}" style="color: white; background-color: green;">
+				<f:setPropertyActionListener target="#{colorBean.color}" value="green"/>
+			</h:commandButton>
+		</h:panelGrid>
+	</h:form>
+</h:body>
+</html>
