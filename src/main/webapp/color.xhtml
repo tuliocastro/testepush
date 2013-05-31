@@ -21,7 +21,7 @@
         }
         jQuery(document).ready(function () {
             //set the uriPrefix so icepush will make requests to the correct URL
-            ice.push.configuration.uriPrefix = '/TestePushAWS/';
+            ice.push.configuration.uriPrefix = '/TestePushAWS/'; 
             //register the icepush client, based on the user-primary-key
             jQuery.push.listenToGroup("colorPage", myPushNotificationCallback);
         });
